@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import Dashboard from './dashboard/Dashboard';
+import Display from './display/Display';
 import './App.css';
 
 class App extends Component {
+  state = {
+    balls: 0,
+    strikes: 0,
+  }
+
+  strike = () => {
+    if(this.state.strikes === 2) {
+      this.setState({ balls: 0, strikes: 0 })
+    } else {
+      this.setState({ strikes: this.state.strikes + 1 })
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <Display strikes={this.state.strikes} balls={this.state.balls} />
+          <Dashboard strike={this.strike} ball={this.ball} foul={this.foul} hit={this.hit} />
       </div>
     );
   }
